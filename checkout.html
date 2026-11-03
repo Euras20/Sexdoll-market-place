@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Commande | Sexydoll Atelier</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {darkMode: "class", theme: {extend: {"colors": {"primary": "#001633", "secondary": "#8c4677", "surface": "#f9f9ff", "on-surface": "#151c28", "on-surface-variant": "#44474e"}, "fontFamily": {"sans": ["Manrope"]}}}};
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-sans antialiased">
+    <header class="fixed top-0 left-0 w-full z-40 bg-white/95 backdrop-blur shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="text-xl uppercase tracking-wider text-secondary font-semibold">Sexydoll</a>
+            <span class="text-sm text-on-surface-variant">Commande sécurisée & discrète</span>
+        </div>
+    </header>
+
+    <main class="pt-20 pb-16 max-w-7xl mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Steps -->
+            <div class="lg:col-span-7 space-y-6">
+                <!-- Progress -->
+                <div class="flex items-center gap-2 text-sm mb-4">
+                    <span class="step-indicator px-3 py-1 rounded-full bg-primary text-white font-medium" data-step="1">1. Livraison</span>
+                    <span class="text-outline">→</span>
+                    <span class="step-indicator px-3 py-1 rounded-full bg-gray-200" data-step="2">2. Vérification</span>
+                    <span class="text-outline">→</span>
+                    <span class="step-indicator px-3 py-1 rounded-full bg-gray-200" data-step="3">3. Paiement</span>
+                </div>
+
+                <!-- Step 1: Delivery -->
+                <div id="step-1" class="bg-white rounded-xl p-6 shadow-sm space-y-5">
+                    <h2 class="text-xl font-semibold text-primary">Mode de livraison</h2>
+                    
+                    <div class="space-y-3">
+                        <label class="flex items-start gap-3 p-4 border-2 rounded-lg cursor-pointer border-primary bg-primary/5">
+                            <input type="radio" name="delivery" value="anonymous" checked class="mt-1" />
+                            <div>
+                                <div class="font-semibold">Livraison anonyme</div>
+                                <div class="text-sm text-on-surface-variant">Aucun nom requis. Uniquement l'adresse de livraison. Emballage 100% neutre.</div>
+                            </div>
+                        </label>
+                        <label class="flex items-start gap-3 p-4 border rounded-lg cursor-pointer hover:border-primary">
+                            <input type="radio" name="delivery" value="standard" class="mt-1" />
+                            <div>
+                                <div class="font-semibold">Livraison standard</div>
+                                <div class="text-sm text-on-surface-variant">Nom + téléphone pour suivi. Emballage discret.</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div id="delivery-fields" class="space-y-4">
+                        <div id="standard-fields" class="hidden space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Nom complet</label>
+                                <input type="text" id="name" class="w-full border rounded-lg px-4 py-3" placeholder="Votre nom" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Téléphone</label>
+                                <input type="tel" id="phone" class="w-full border rounded-lg px-4 py-3" placeholder="+33..." />
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Adresse de livraison</label>
+                            <input type="text" id="address" required class="w-full border rounded-lg px-4 py-3" placeholder="Rue, numéro" />
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Code postal</label>
+                                <input type="text" id="postal" required class="w-full border rounded-lg px-4 py-3" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Ville</label>
+                                <input type="text" id="city" required class="w-full border rounded-lg px-4 py-3" />
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Pays</label>
+                            <select id="country" class="w-full border rounded-lg px-4 py-3">
+                                <option>France</option>
+                                <option>Belgique</option>
+                                <option>Suisse</option>
+                                <option>Luxembourg</option>
+                                <option>Allemagne</option>
+                                <option>Autre UE</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Note / Instructions (optionnel)</label>
+                            <textarea id="note" rows="3" class="w-full border rounded-lg px-4 py-3" placeholder="Code d'accès, étage, préférences..."></textarea>
+                        </div>
+                    </div>
+
+                    <button id="to-step-2" class="w-full bg-primary text-white py-4 rounded-lg font-semibold uppercase tracking-wider">
+                        Continuer
+                    </button>
+                </div>
+
+                <!-- Step 2: Verification -->
+                <div id="step-2" class="hidden bg-white rounded-xl p-6 shadow-sm space-y-5">
+                    <h2 class="text-xl font-semibold text-primary">Vérifiez vos informations</h2>
+                    <div id="verify-summary" class="bg-gray-50 rounded-lg p-4 space-y-2 text-sm"></div>
+                    <div class="flex gap-3">
+                        <button id="back-to-1" class="flex-1 border py-3 rounded-lg">Retour</button>
+                        <button id="to-step-3" class="flex-1 bg-primary text-white py-3 rounded-lg font-semibold">Confirmer & Payer</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Payment -->
+                <div id="step-3" class="hidden bg-white rounded-xl p-6 shadow-sm space-y-5">
+                    <h2 class="text-xl font-semibold text-primary">Paiement par virement</h2>
+                    <p class="text-sm text-on-surface-variant">Effectuez le virement avec les coordonnées ci-dessous, puis uploadez la preuve de paiement.</p>
+                    
+                    <div class="bg-primary/5 border border-primary/20 rounded-lg p-4 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Bénéficiaire</span>
+                            <span class="font-medium">SILHOUETTE ATELIER</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">IBAN</span>
+                            <div class="flex items-center gap-2">
+                                <span id="iban" class="font-mono font-medium">FR76 3000 6000 0112 3456 7890 189</span>
+                                <button onclick="navigator.clipboard.writeText(document.getElementById('iban').textContent)" class="text-secondary text-sm">Copier</button>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">BIC</span>
+                            <span class="font-mono">BNPAFRPP</span>
+                        </div>
+                        <div class="flex justify-between items-center text-lg font-bold text-primary pt-2 border-t">
+                            <span>Montant à virer</span>
+                            <span id="payment-amount">0 €</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Preuve de paiement (screenshot)</label>
+                        <input type="file" accept="image/*" class="w-full border rounded-lg px-4 py-3" id="proof" />
+                        <p class="text-xs text-on-surface-variant mt-1">Formats acceptés : JPG, PNG. Taille max 5 Mo.</p>
+                    </div>
+
+                    <button id="validate-order" class="w-full bg-secondary text-white py-4 rounded-lg font-semibold uppercase tracking-wider">
+                        Valider la commande
+                    </button>
+                    <p class="text-xs text-center text-on-surface-variant">Une fois validée, vous recevrez une confirmation par email (si fourni) ou par le support.</p>
+                </div>
+
+                <!-- Success -->
+                <div id="step-success" class="hidden bg-white rounded-xl p-8 shadow-sm text-center space-y-4">
+                    <span class="material-symbols-outlined text-6xl text-secondary">check_circle</span>
+                    <h2 class="text-2xl font-semibold text-primary">Commande validée</h2>
+                    <p>Votre commande a été enregistrée. Notre équipe vérifiera le paiement et vous contactera pour la livraison discrète.</p>
+                    <a href="index.html" class="inline-block mt-4 px-6 py-3 bg-primary text-white rounded-lg">Retour à l'accueil</a>
+                </div>
+            </div>
+
+            <!-- Order summary sidebar -->
+            <div class="lg:col-span-5">
+                <div class="bg-white rounded-xl p-6 shadow-sm sticky top-24">
+                    <h3 class="font-semibold text-primary mb-4">Récapitulatif de commande</h3>
+                    <div id="order-summary" class="space-y-4 text-sm">
+                        <!-- populated -->
+                    </div>
+                    <div class="border-t mt-4 pt-4 flex justify-between text-lg font-bold text-primary">
+                        <span>Total</span>
+                        <span id="sidebar-total">0 €</span>
+                    </div>
+                    <p class="text-xs text-on-surface-variant mt-3">Livraison discrète incluse en UE. Emballage neutre garanti.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentOrder = JSON.parse(localStorage.getItem('currentOrder') || '{}');
+        let deliveryInfo = {};
+
+        function renderSummary() {
+            if (!currentOrder.name) {
+                document.getElementById('order-summary').innerHTML = '<p>Aucune commande. <a href="collection.html" class="text-secondary">Choisissez un modèle</a></p>';
+                return;
+            }
+            const addonsHtml = (currentOrder.addons || []).map(a => `<div class="flex justify-between"><span>${a.name}</span><span>+${a.price} €</span></div>`).join('');
+            document.getElementById('order-summary').innerHTML = `
+                <div class="flex gap-3">
+                    <img src="${currentOrder.image}" class="w-16 h-20 object-cover rounded" />
+                    <div>
+                        <div class="font-medium">${currentOrder.name}</div>
+                        <div class="text-xs text-on-surface-variant">Personnalisé</div>
+                    </div>
+                </div>
+                <div class="space-y-1 text-sm border-t pt-3">
+                    <div class="flex justify-between"><span>Base</span><span>${currentOrder.basePrice} €</span></div>
+                    ${currentOrder.sizeExtra ? `<div class="flex justify-between"><span>Taille</span><span>+${currentOrder.sizeExtra} €</span></div>` : ''}
+                    ${currentOrder.pubicExtra ? `<div class="flex justify-between"><span>Poils pubiens</span><span>+${currentOrder.pubicExtra} €</span></div>` : ''}
+                    ${addonsHtml}
+                </div>
+            `;
+            const total = currentOrder.total || 0;
+            document.getElementById('sidebar-total').textContent = total.toLocaleString('fr-FR') + ' €';
+            document.getElementById('payment-amount').textContent = total.toLocaleString('fr-FR') + ' €';
+        }
+
+        renderSummary();
+
+        // Delivery type toggle
+        document.querySelectorAll('input[name="delivery"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                document.getElementById('standard-fields').classList.toggle('hidden', radio.value !== 'standard');
+            });
+        });
+
+        // Step navigation
+        function showStep(n) {
+            document.querySelectorAll('[id^="step-"]').forEach(el => el.classList.add('hidden'));
+            document.getElementById('step-' + n).classList.remove('hidden');
+            document.querySelectorAll('.step-indicator').forEach(ind => {
+                const s = parseInt(ind.dataset.step);
+                ind.classList.toggle('bg-primary', s <= n);
+                ind.classList.toggle('text-white', s <= n);
+                ind.classList.toggle('bg-gray-200', s > n);
+            });
+        }
+
+        document.getElementById('to-step-2').addEventListener('click', () => {
+            const isAnon = document.querySelector('input[name="delivery"]:checked').value === 'anonymous';
+            deliveryInfo = {
+                type: isAnon ? 'Anonyme' : 'Standard',
+                name: isAnon ? '—' : document.getElementById('name').value,
+                phone: isAnon ? '—' : document.getElementById('phone').value,
+                address: document.getElementById('address').value,
+                postal: document.getElementById('postal').value,
+                city: document.getElementById('city').value,
+                country: document.getElementById('country').value,
+                note: document.getElementById('note').value
+            };
+            if (!deliveryInfo.address || !deliveryInfo.postal || !deliveryInfo.city) {
+                alert('Veuillez remplir l\'adresse complète.');
+                return;
+            }
+            document.getElementById('verify-summary').innerHTML = `
+                <div><strong>Type :</strong> ${deliveryInfo.type}</div>
+                ${!isAnon ? `<div><strong>Nom :</strong> ${deliveryInfo.name}</div><div><strong>Tél :</strong> ${deliveryInfo.phone}</div>` : ''}
+                <div><strong>Adresse :</strong> ${deliveryInfo.address}, ${deliveryInfo.postal} ${deliveryInfo.city}, ${deliveryInfo.country}</div>
+                ${deliveryInfo.note ? `<div><strong>Note :</strong> ${deliveryInfo.note}</div>` : ''}
+            `;
+            showStep(2);
+        });
+
+        document.getElementById('back-to-1').addEventListener('click', () => showStep(1));
+        document.getElementById('to-step-3').addEventListener('click', () => showStep(3));
+
+        document.getElementById('validate-order').addEventListener('click', () => {
+            const file = document.getElementById('proof').files[0];
+            if (!file) {
+                alert('Veuillez uploader la preuve de paiement.');
+                return;
+            }
+            // In real app: upload file, save order
+            showStep('success');
+            localStorage.removeItem('currentOrder');
+        });
+
+        showStep(1);
+    </script>
+</body>
+</html>
