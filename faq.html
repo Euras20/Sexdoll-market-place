@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ · Sexydoll</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#001633",
+            "on-primary": "#ffffff",
+            "primary-container": "#172b49",
+            "on-primary-container": "#8093b6",
+            secondary: "#8c4677",
+            surface: "#f9f9ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f1f3ff",
+            "on-surface": "#151c28",
+            "on-surface-variant": "#44474e",
+            outline: "#74777e",
+            "outline-variant": "#c4c6ce"
+          },
+          fontFamily: { sans: ["Manrope", "system-ui", "sans-serif"] }
+        }
+      }
+    };
+  </script>
+  <style>body { font-family: Manrope, system-ui, sans-serif; } .prose h2 { font-size: 1.15rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem; color: #001633; } .prose p, .prose li { line-height: 1.7; } .prose ul { list-style: disc; padding-left: 1.25rem; margin: 0.5rem 0 1rem; }</style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen antialiased">
+<!-- Age gate -->
+<div id="age-gate" class="hidden fixed inset-0 z-[100] bg-black/75 backdrop-blur-md flex items-center justify-center p-6">
+  <div class="bg-surface-container-lowest rounded-2xl p-10 max-w-md w-full text-center space-y-6 shadow-2xl">
+    <div class="mx-auto w-16 h-16 rounded-full bg-primary-container flex items-center justify-center">
+      <span class="material-symbols-outlined text-3xl text-on-primary-container">verified_user</span>
+    </div>
+    <h2 class="text-2xl font-semibold text-primary">Contenu réservé aux adultes</h2>
+    <p class="text-sm text-on-surface-variant">Confirmez que vous avez au moins 18 ans.</p>
+    <div class="flex flex-col gap-3">
+      <button type="button" id="age-yes" class="bg-primary text-on-primary py-4 rounded-xl text-sm font-semibold uppercase tracking-wider">J'ai 18 ans ou plus — Entrer</button>
+      <a href="https://www.google.fr" class="py-3 text-sm uppercase tracking-wider text-on-surface-variant">Quitter</a>
+    </div>
+  </div>
+</div>
+
+  <header class="bg-surface-container-lowest/95 backdrop-blur-md border-b border-outline-variant/40 sticky top-0 z-40">
+    <div class="max-w-3xl mx-auto px-5 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 text-sm font-medium text-on-surface-variant hover:text-primary transition">
+        <span class="material-symbols-outlined text-[20px]">arrow_back</span> Accueil
+      </a>
+      <span class="text-xs uppercase tracking-[0.18em] text-on-surface-variant font-medium">Sexydoll</span>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-5 py-12 md:py-16">
+    <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-primary mb-6">Questions fréquentes</h1>
+    <div class="prose text-on-surface-variant text-sm md:text-[15px] space-y-4">
+      
+<h2>La livraison est-elle discrète ?</h2>
+<p>Oui. Emballage neutre, aucune mention externe du contenu.</p>
+<h2>Comment suivre ma commande ?</h2>
+<p>Un code de suivi vous est envoyé après expédition. Vous pouvez également utiliser la page Suivi de commande.</p>
+<h2>Quels matériaux utilisez-vous ?</h2>
+<p>Silicone platine et TPE premium, sélectionnés pour leur qualité et leur rendu.</p>
+<h2>Puis-je retourner un article ?</h2>
+<p>Consultez notre page Garantie & Retours pour les conditions applicables.</p>
+
+    </div>
+  </main>
+
+  <footer class="border-t border-outline-variant/30 mt-12 py-8 text-center text-xs text-on-surface-variant">
+    <a href="index.html" class="hover:text-primary">Accueil</a>
+    <span class="mx-2">·</span>
+    <a href="collection.html" class="hover:text-primary">Boutique</a>
+    <span class="mx-2">·</span>
+    <a href="tracking.html" class="hover:text-primary">Suivi</a>
+    <span class="mx-2">·</span>
+    <a href="contact.html" class="hover:text-primary">Contact</a>
+  </footer>
+
+  <script src="scripts/faq.js"></script>
+</body>
+</html>

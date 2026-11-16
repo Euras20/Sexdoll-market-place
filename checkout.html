@@ -12,6 +12,24 @@
     </script>
 </head>
 <body class="bg-surface text-on-surface font-sans antialiased">
+<!-- Age gate -->
+<div id="age-gate" class="hidden fixed inset-0 z-[100] bg-black/75 backdrop-blur-md flex items-center justify-center p-6" role="dialog" aria-modal="true" aria-labelledby="age-title">
+  <div class="bg-surface-container-lowest rounded-2xl p-10 max-w-md w-full text-center space-y-6 shadow-2xl border border-white/10">
+    <div class="mx-auto w-16 h-16 rounded-full bg-primary-container flex items-center justify-center">
+      <span class="material-symbols-outlined text-3xl text-on-primary-container">verified_user</span>
+    </div>
+    <div>
+      <div class="text-[11px] uppercase tracking-[0.22em] text-on-surface-variant mb-2 font-medium">Accès restreint</div>
+      <h2 id="age-title" class="text-2xl font-semibold text-primary tracking-tight">Contenu réservé aux adultes</h2>
+    </div>
+    <p class="text-sm text-on-surface-variant leading-relaxed">Ce site propose des produits destinés à un public majeur. En continuant, vous confirmez avoir au moins 18 ans et accepter nos conditions d'utilisation.</p>
+    <div class="flex flex-col gap-3 pt-2">
+      <button type="button" id="age-yes" class="bg-primary text-on-primary py-4 rounded-xl text-sm font-semibold uppercase tracking-wider hover:opacity-90 active:scale-[0.98] transition-all">J'ai 18 ans ou plus — Entrer</button>
+      <a href="https://www.google.fr" class="py-3 text-sm uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition">Quitter le site</a>
+    </div>
+  </div>
+</div>
+
     <header class="fixed top-0 left-0 w-full z-40 bg-white/95 backdrop-blur shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <a href="index.html" class="text-xl uppercase tracking-wider text-secondary font-semibold">Sexydoll</a>
@@ -54,6 +72,10 @@
                     </div>
 
                     <div id="delivery-fields" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Email (pour la facture et le suivi)</label>
+                            <input type="email" id="email" required class="w-full border rounded-lg px-4 py-3" placeholder="vous@email.com" />
+                        </div>
                         <div id="standard-fields" class="hidden space-y-4">
                             <div>
                                 <label class="block text-sm font-medium mb-1">Nom complet</label>
@@ -118,7 +140,7 @@
                     <div class="bg-primary/5 border border-primary/20 rounded-lg p-4 space-y-2">
                         <div class="flex justify-between items-center">
                             <span class="text-sm">Bénéficiaire</span>
-                            <span class="font-medium">SILHOUETTE ATELIER</span>
+                            <span id="beneficiary" class="font-medium">SILHOUETTE ATELIER</span>
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-sm">IBAN</span>
@@ -129,7 +151,7 @@
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-sm">BIC</span>
-                            <span class="font-mono">BNPAFRPP</span>
+                            <span id="bic" class="font-mono">BNPAFRPP</span>
                         </div>
                         <div class="flex justify-between items-center text-lg font-bold text-primary pt-2 border-t">
                             <span>Montant à virer</span>
@@ -175,97 +197,11 @@
         </div>
     </main>
 
-    <script>
-        let currentOrder = JSON.parse(localStorage.getItem('currentOrder') || '{}');
-        let deliveryInfo = {};
-
-        function renderSummary() {
-            if (!currentOrder.name) {
-                document.getElementById('order-summary').innerHTML = '<p>Aucune commande. <a href="collection.html" class="text-secondary">Choisissez un modèle</a></p>';
-                return;
-            }
-            const addonsHtml = (currentOrder.addons || []).map(a => `<div class="flex justify-between"><span>${a.name}</span><span>+${a.price} €</span></div>`).join('');
-            document.getElementById('order-summary').innerHTML = `
-                <div class="flex gap-3">
-                    <img src="${currentOrder.image}" class="w-16 h-20 object-cover rounded" />
-                    <div>
-                        <div class="font-medium">${currentOrder.name}</div>
-                        <div class="text-xs text-on-surface-variant">Personnalisé</div>
-                    </div>
-                </div>
-                <div class="space-y-1 text-sm border-t pt-3">
-                    <div class="flex justify-between"><span>Base</span><span>${currentOrder.basePrice} €</span></div>
-                    ${currentOrder.sizeExtra ? `<div class="flex justify-between"><span>Taille</span><span>+${currentOrder.sizeExtra} €</span></div>` : ''}
-                    ${currentOrder.pubicExtra ? `<div class="flex justify-between"><span>Poils pubiens</span><span>+${currentOrder.pubicExtra} €</span></div>` : ''}
-                    ${addonsHtml}
-                </div>
-            `;
-            const total = currentOrder.total || 0;
-            document.getElementById('sidebar-total').textContent = total.toLocaleString('fr-FR') + ' €';
-            document.getElementById('payment-amount').textContent = total.toLocaleString('fr-FR') + ' €';
-        }
-
-        renderSummary();
-
-        // Delivery type toggle
-        document.querySelectorAll('input[name="delivery"]').forEach(radio => {
-            radio.addEventListener('change', () => {
-                document.getElementById('standard-fields').classList.toggle('hidden', radio.value !== 'standard');
-            });
-        });
-
-        // Step navigation
-        function showStep(n) {
-            document.querySelectorAll('[id^="step-"]').forEach(el => el.classList.add('hidden'));
-            document.getElementById('step-' + n).classList.remove('hidden');
-            document.querySelectorAll('.step-indicator').forEach(ind => {
-                const s = parseInt(ind.dataset.step);
-                ind.classList.toggle('bg-primary', s <= n);
-                ind.classList.toggle('text-white', s <= n);
-                ind.classList.toggle('bg-gray-200', s > n);
-            });
-        }
-
-        document.getElementById('to-step-2').addEventListener('click', () => {
-            const isAnon = document.querySelector('input[name="delivery"]:checked').value === 'anonymous';
-            deliveryInfo = {
-                type: isAnon ? 'Anonyme' : 'Standard',
-                name: isAnon ? '—' : document.getElementById('name').value,
-                phone: isAnon ? '—' : document.getElementById('phone').value,
-                address: document.getElementById('address').value,
-                postal: document.getElementById('postal').value,
-                city: document.getElementById('city').value,
-                country: document.getElementById('country').value,
-                note: document.getElementById('note').value
-            };
-            if (!deliveryInfo.address || !deliveryInfo.postal || !deliveryInfo.city) {
-                alert('Veuillez remplir l\'adresse complète.');
-                return;
-            }
-            document.getElementById('verify-summary').innerHTML = `
-                <div><strong>Type :</strong> ${deliveryInfo.type}</div>
-                ${!isAnon ? `<div><strong>Nom :</strong> ${deliveryInfo.name}</div><div><strong>Tél :</strong> ${deliveryInfo.phone}</div>` : ''}
-                <div><strong>Adresse :</strong> ${deliveryInfo.address}, ${deliveryInfo.postal} ${deliveryInfo.city}, ${deliveryInfo.country}</div>
-                ${deliveryInfo.note ? `<div><strong>Note :</strong> ${deliveryInfo.note}</div>` : ''}
-            `;
-            showStep(2);
-        });
-
-        document.getElementById('back-to-1').addEventListener('click', () => showStep(1));
-        document.getElementById('to-step-3').addEventListener('click', () => showStep(3));
-
-        document.getElementById('validate-order').addEventListener('click', () => {
-            const file = document.getElementById('proof').files[0];
-            if (!file) {
-                alert('Veuillez uploader la preuve de paiement.');
-                return;
-            }
-            // In real app: upload file, save order
-            showStep('success');
-            localStorage.removeItem('currentOrder');
-        });
-
-        showStep(1);
-    </script>
+<script src="scripts/api.js?v=2"></script>
+<script src="scripts/catalog.js?v=2"></script>
+<script src="scripts/cart.js?v=2"></script>
+<script src="scripts/checkout.js?v=3"></script>
+<script src="scripts/checkout-page.js"></script>
 </body>
+
 </html>

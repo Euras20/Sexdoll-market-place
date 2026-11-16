@@ -43,13 +43,19 @@ tailwind.config = { theme: { extend: {
 <body class="bg-surface font-sans text-body-md text-on-surface antialiased">
 
 <!-- Age gate -->
-<div id="age-gate" class="hidden fixed inset-0 z-50 bg-primary/95 flex items-center justify-center p-6" role="dialog" aria-modal="true" aria-labelledby="age-title">
-  <div class="bg-surface-container-lowest rounded-xl p-8 max-w-sm text-center space-y-4">
-    <h2 id="age-title" class="text-headline-sm text-primary">Contenu réservé aux adultes</h2>
-    <p class="text-body-sm text-on-surface-variant">Ce site propose des produits pour adultes. Confirmez que vous avez au moins 18 ans.</p>
-    <div class="flex flex-col gap-2">
-      <button type="button" id="age-yes" class="bg-primary text-on-primary py-3 rounded-lg text-label-md uppercase tracking-wider">J'ai 18 ans ou plus</button>
-      <a href="https://www.google.fr" class="py-3 text-label-md uppercase tracking-wider text-on-surface-variant">Quitter</a>
+<div id="age-gate" class="hidden fixed inset-0 z-[100] bg-black/75 backdrop-blur-md flex items-center justify-center p-6" role="dialog" aria-modal="true" aria-labelledby="age-title">
+  <div class="bg-surface-container-lowest rounded-2xl p-10 max-w-md w-full text-center space-y-6 shadow-2xl border border-white/10">
+    <div class="mx-auto w-16 h-16 rounded-full bg-primary-container flex items-center justify-center">
+      <span class="material-symbols-outlined text-3xl text-on-primary-container">verified_user</span>
+    </div>
+    <div>
+      <div class="text-[11px] uppercase tracking-[0.22em] text-on-surface-variant mb-2 font-medium">Accès restreint</div>
+      <h2 id="age-title" class="text-2xl font-semibold text-primary tracking-tight">Contenu réservé aux adultes</h2>
+    </div>
+    <p class="text-sm text-on-surface-variant leading-relaxed">Ce site propose des produits destinés à un public majeur. En continuant, vous confirmez avoir au moins 18 ans et accepter nos conditions d'utilisation.</p>
+    <div class="flex flex-col gap-3 pt-2">
+      <button type="button" id="age-yes" class="bg-primary text-on-primary py-4 rounded-xl text-sm font-semibold uppercase tracking-wider hover:opacity-90 active:scale-[0.98] transition-all">J'ai 18 ans ou plus — Entrer</button>
+      <a href="https://www.google.fr" class="py-3 text-sm uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition">Quitter le site</a>
     </div>
   </div>
 </div>
@@ -62,10 +68,10 @@ tailwind.config = { theme: { extend: {
         <span class="hidden md:inline">Atelier d'art &amp; anatomie sur mesure</span>
       </div>
       <nav class="hidden lg:flex items-center gap-space-md">
-        <a class="hover:text-on-surface" href="#">À propos</a>
-        <a class="hover:text-on-surface" href="#">Paiement</a>
-        <a class="hover:text-on-surface" href="#">Livraison</a>
-        <a class="hover:text-on-surface" href="#">Contactez-nous</a>
+        <a class="hover:text-on-surface" href="a-propos.html">À propos</a>
+        <a class="hover:text-on-surface" href="paiement-securise.html">Paiement</a>
+        <a class="hover:text-on-surface" href="livraison-discrete.html">Livraison</a>
+        <a class="hover:text-on-surface" href="contact.html">Contactez-nous</a>
       </nav>
     </div>
   </div>
@@ -93,14 +99,14 @@ tailwind.config = { theme: { extend: {
     <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop overflow-x-auto">
       <nav class="flex items-center space-x-space-md py-2 min-w-max text-label-md text-on-surface-variant">
         <a class="px-space-sm py-1 hover:text-on-surface" href="index.html">Accueil</a>
-        <a aria-current="page" class="px-space-sm py-1 bg-primary-container text-on-primary font-bold" href="collection.html">Toutes les poupées</a>
-        <a class="px-space-sm py-1 hover:text-on-surface" href="collection.html">Par morphologie</a>
-        <a class="px-space-sm py-1 hover:text-on-surface" href="collection.html">Par matière</a>
-        <a class="px-space-sm py-1 hover:text-on-surface" href="#">Par taille</a>
-        <a class="px-space-sm py-1 hover:text-on-surface" href="#">Par marque</a>
-        <a class="px-space-sm py-1 hover:text-on-surface" href="#">Promotions</a>
-        <a class="px-space-sm py-1 hover:text-on-surface" href="#">Nouveautés</a>
-        <a class="px-space-sm py-1 hover:text-on-surface" href="#">Guides</a>
+        <a aria-current="page" class="px-space-sm py-1 bg-primary-container text-on-primary font-bold" href="collection.html">Toutes les collections</a>
+        <a class="px-space-sm py-1 hover:text-on-surface" href="collection.html?view=morphologie">Par morphologie</a>
+        <a class="px-space-sm py-1 hover:text-on-surface" href="collection.html?view=matiere">Par matière</a>
+        <a class="px-space-sm py-1 hover:text-on-surface" href="collection.html?view=taille">Par taille</a>
+        <a class="px-space-sm py-1 hover:text-on-surface" href="collection.html?view=marque">Par marque</a>
+        <a class="px-space-sm py-1 hover:text-on-surface" href="promotions.html">Promotions</a>
+        <a class="px-space-sm py-1 hover:text-on-surface" href="nouveautes.html">Nouveautés</a>
+        <a class="px-space-sm py-1 hover:text-on-surface" href="guides.html">Guides</a>
       </nav>
     </div>
   </div>
@@ -134,27 +140,27 @@ tailwind.config = { theme: { extend: {
       </div>
       <div class="flex flex-col gap-space-sm">
         <h3 class="text-label-md uppercase tracking-wider text-white">Boutique</h3>
-        <a class="hover:text-white" href="collection.html">Toutes les poupées</a>
-        <a class="hover:text-white" href="#">Nouveautés</a>
-        <a class="hover:text-white" href="#">Promotions</a>
+        <a class="hover:text-white" href="collection.html">Toutes les collections</a>
+        <a class="hover:text-white" href="nouveautes.html">Nouveautés</a>
+        <a class="hover:text-white" href="promotions.html">Promotions</a>
         <a class="hover:text-white" href="#">Marques &amp; Fabricants</a>
         <a class="hover:text-white" href="#">Silicone Platine &amp; TPE</a>
       </div>
       <div class="flex flex-col gap-space-sm">
         <h3 class="text-label-md uppercase tracking-wider text-white">Informations</h3>
-        <a class="hover:text-white" href="#">À propos de l'Atelier</a>
-        <a class="hover:text-white" href="#">Paiement 100% sécurisé</a>
-        <a class="hover:text-white" href="#">Protocole de livraison discrète</a>
-        <a class="hover:text-white" href="#">FAQ</a>
-        <a class="hover:text-white" href="#">Nous contacter</a>
+        <a class="hover:text-white" href="a-propos.html">À propos de l'Atelier</a>
+        <a class="hover:text-white" href="paiement-securise.html">Paiement 100% sécurisé</a>
+        <a class="hover:text-white" href="livraison-discrete.html">Protocole de livraison discrète</a>
+        <a class="hover:text-white" href="faq.html">FAQ</a>
+        <a class="hover:text-white" href="contact.html">Nous contacter</a>
       </div>
       <div class="flex flex-col gap-space-sm">
         <h3 class="text-label-md uppercase tracking-wider text-white">Service Client &amp; Légal</h3>
-        <a class="hover:text-white" href="#">Politique de confidentialité</a>
-        <a class="hover:text-white" href="#">Conditions Générales de Vente</a>
+        <a class="hover:text-white" href="confidentialite.html">Politique de confidentialité</a>
+        <a class="hover:text-white" href="cgv.html">Conditions Générales de Vente</a>
         <a class="hover:text-white" href="#">Garantie &amp; Retours</a>
-        <a class="hover:text-white" href="#">Mentions légales</a>
-        <a class="hover:text-white" href="#">Guides d'entretien &amp; usage</a>
+        <a class="hover:text-white" href="mentions-legales.html">Mentions légales</a>
+        <a class="hover:text-white" href="guides.html">Guides d'entretien &amp; usage</a>
       </div>
     </div>
     <div class="mt-space-xl pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md text-caption text-outline-variant">
@@ -166,144 +172,10 @@ tailwind.config = { theme: { extend: {
   </div>
 </footer>
 
-<script>
-/* ---------- Safe storage ---------- */
-const store = {
-  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
-  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
-};
-const fmt = n => n.toLocaleString('fr-FR') + ' €';
-const PLACEHOLDER = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800"><rect width="100%" height="100%" fill="#e8edff"/></svg>');
-const PRODUCT_PAGE = 'produit.html'; // change if your product page has another file name
-
-document.getElementById('year').textContent = new Date().getFullYear();
-
-/* Age gate */
-const gate = document.getElementById('age-gate');
-if (!store.get('ageOk', false)) gate.classList.remove('hidden');
-document.getElementById('age-yes').addEventListener('click', () => { store.set('ageOk', true); gate.classList.add('hidden'); });
-
-/* Badges */
-[['cart-badge', store.get('cart', []).length], ['fav-badge', store.get('favs', []).length]].forEach(([id, n]) => {
-  const el = document.getElementById(id);
-  el.textContent = n;
-  el.classList.toggle('hidden', n === 0);
-  el.classList.toggle('flex', n > 0);
-});
-
-/* ---------- Data (keep in sync with product page; host your own images) ---------- */
-// "tags" drive the filters; "height" is the default size shown on the product page.
-const products = [
-  { id: 1, name: 'Aria Platine',    material: 'Silicone Platine', height: 155, price: 2499, image: 'images/aria-1.jpg',  tags: ['silicone', 'ultra'] },
-  { id: 2, name: 'Luna TPE',        material: 'TPE Médical',      height: 155, price: 1699, image: 'images/luna-1.jpg',  tags: ['tpe'] },
-  { id: 3, name: 'Sofia Généreuse', material: 'Silicone Platine', height: 162, price: 2899, image: 'images/sofia-1.jpg', tags: ['silicone', 'busty'] },
-  { id: 4, name: 'Eva Compacte',    material: 'TPE',              height: 148, price: 1499, image: 'images/eva-1.jpg',   tags: ['tpe', 'compact'] },
-  { id: 5, name: 'Mia Ultra',       material: 'Silicone Platine', height: 162, price: 2699, image: 'images/mia-1.jpg',   tags: ['silicone', 'ultra'] },
-  { id: 6, name: 'Nina Sur Mesure', material: 'Silicone',         height: 155, price: 3199, image: 'images/nina-1.jpg',  tags: ['silicone', 'custom'] }
-];
-const FILTERS = [
-  { id: 'all', label: 'Tous' }, { id: 'silicone', label: 'Silicone' }, { id: 'tpe', label: 'TPE' },
-  { id: 'ultra', label: 'Ultra-réalistes' }, { id: 'busty', label: 'Formes généreuses' },
-  { id: 'compact', label: 'Compactes' }, { id: 'custom', label: 'Sur mesure' }
-];
-
-/* ---------- State ---------- */
-let activeFilter = 'all';
-let query = '';
-
-const filtersEl = document.getElementById('filters');
-const gridEl = document.getElementById('product-grid');
-const countEl = document.getElementById('result-count');
-const emptyEl = document.getElementById('empty');
-const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-
-function renderFilters() {
-  filtersEl.replaceChildren(...FILTERS.map(f => {
-    const b = document.createElement('button');
-    const on = f.id === activeFilter;
-    b.type = 'button';
-    b.setAttribute('aria-pressed', on);
-    b.dataset.filter = f.id;
-    b.textContent = f.label;
-    b.className = 'px-4 py-2 rounded-full text-body-sm font-medium transition-colors ' +
-      (on ? 'bg-primary text-on-primary' : 'bg-surface-container-low hover:bg-surface-container');
-    return b;
-  }));
-}
-
-function card(p) {
-  const a = document.createElement('a');
-  a.href = `${PRODUCT_PAGE}?id=${encodeURIComponent(p.id)}`;
-  a.className = 'group flex flex-col bg-surface-container-lowest rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all';
-
-  const imgWrap = document.createElement('div');
-  imgWrap.className = 'relative aspect-[3/4] overflow-hidden bg-surface-container';
-  const img = document.createElement('img');
-  img.className = 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-500';
-  img.alt = p.name; img.loading = 'lazy';
-  img.onerror = () => { img.onerror = null; img.src = PLACEHOLDER; };
-  img.src = p.image;
-  const badge = document.createElement('div');
-  badge.className = 'absolute top-3 left-3 bg-surface-container-lowest/90 px-2.5 py-1 rounded text-primary text-label-sm font-semibold uppercase tracking-wider';
-  badge.textContent = p.material;
-  imgWrap.append(img, badge);
-
-  const body = document.createElement('div');
-  body.className = 'p-space-md flex flex-col flex-1 justify-between gap-space-xs';
-  const top = document.createElement('div');
-  const h3 = document.createElement('h3');
-  h3.className = 'text-title-md text-primary group-hover:text-secondary transition-colors';
-  h3.textContent = p.name;
-  const h = document.createElement('p');
-  h.className = 'text-body-sm text-on-surface-variant mt-1';
-  h.textContent = `${p.height} cm`;
-  top.append(h3, h);
-
-  const bottom = document.createElement('div');
-  bottom.className = 'flex items-center justify-between pt-space-xs';
-  const price = document.createElement('span');
-  price.className = 'font-semibold text-primary';
-  price.textContent = 'À partir de ' + fmt(p.price);
-  const cta = document.createElement('span');
-  cta.className = 'inline-flex items-center gap-1 text-label-md text-primary font-semibold group-hover:translate-x-1 transition-transform';
-  cta.append('Découvrir ');
-  const icon = document.createElement('span');
-  icon.className = 'material-symbols-outlined text-[16px]';
-  icon.setAttribute('aria-hidden', 'true');
-  icon.textContent = 'arrow_forward';
-  cta.appendChild(icon);
-  bottom.append(price, cta);
-
-  body.append(top, bottom);
-  a.append(imgWrap, body);
-  return a;
-}
-
-function renderProducts() {
-  const q = norm(query.trim());
-  const list = products.filter(p =>
-    (activeFilter === 'all' || p.tags.includes(activeFilter)) &&
-    (!q || norm(p.name + ' ' + p.material + ' ' + p.height).includes(q)));
-  gridEl.replaceChildren(...list.map(card));
-  emptyEl.classList.toggle('hidden', list.length > 0);
-  countEl.textContent = `${list.length} modèle${list.length > 1 ? 's' : ''}`;
-}
-
-filtersEl.addEventListener('click', e => {
-  const b = e.target.closest('button[data-filter]');
-  if (!b) return;
-  activeFilter = b.dataset.filter;
-  renderFilters();
-  renderProducts();
-});
-document.getElementById('search').addEventListener('input', e => { query = e.target.value; renderProducts(); });
-document.getElementById('reset').addEventListener('click', () => {
-  activeFilter = 'all'; query = ''; document.getElementById('search').value = '';
-  renderFilters(); renderProducts();
-});
-
-renderFilters();
-renderProducts();
-</script>
+<script src="scripts/api.js?v=2"></script>
+<script src="scripts/catalog.js?v=2"></script>
+<script src="scripts/cart.js?v=2"></script>
+<script src="scripts/collection.js"></script>
 </body>
+
 </html>
