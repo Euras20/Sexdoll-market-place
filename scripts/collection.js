@@ -130,3 +130,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
 });
+
+
+window.loadCollectionPage = async function(page) {
+  const params = new URLSearchParams(window.location.search);
+  const category = params.get('category') || '';
+  const q = params.get('q') || '';
+  await StorefrontAPI.loadProducts({
+    containerId: 'product-grid',
+    category: category || undefined,
+    q: q || undefined,
+    page: page,
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
