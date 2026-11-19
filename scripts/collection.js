@@ -21,6 +21,7 @@ document.getElementById('age-yes').addEventListener('click', () => { store.set('
 /* Badges */
 [['cart-badge', store.get('cart', []).length], ['fav-badge', store.get('favs', []).length]].forEach(([id, n]) => {
   const el = document.getElementById(id);
+  if (!el) return;
   el.textContent = n;
   el.classList.toggle('hidden', n === 0);
   el.classList.toggle('flex', n > 0);
