@@ -47,10 +47,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (empty) empty.classList.remove('hidden');
       return;
     }
-    grid.innerHTML = cats.map(c => `
+    grid.innerHTML = cats.map(c => {
+      const img = StorefrontAPI.mediaUrl(c.image);
+      return `
       <a class="group flex flex-col bg-surface-container-lowest rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all" href="collection.html?category=${encodeURIComponent(c.slug)}">
         <div class="relative aspect-[3/4] overflow-hidden bg-surface-container">
-          <div class="absolute inset-0 flex items-center justify-center text-on-surface-variant">Aucune image</div>
+          ${img
+            ? `<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${img}" alt="${c.name}" />`
+            : `<div class="absolute inset-0 flex items-center justify-center text-on-surface-variant">Aucune image</div>`}
           <div class="absolute top-3 left-3 bg-surface-container-lowest/90 px-2.5 py-1 rounded text-primary font-label-sm font-semibold uppercase tracking-wider">${c.name}</div>
         </div>
         <div class="p-space-md">
@@ -58,7 +62,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           <p class="font-body-sm text-on-surface-variant mt-1">${c.description || ''}</p>
           <span class="inline-flex items-center gap-1 mt-3 text-primary font-semibold">Découvrir <span class="material-symbols-outlined text-[16px]">arrow_forward</span></span>
         </div>
-      </a>`).join('');
+      </a>`;
+    }).join('');
   } catch (e) {
     console.info('collections load failed', e);
     if (empty) empty.classList.remove('hidden');
