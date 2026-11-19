@@ -62,6 +62,7 @@ function updateBadges() {
   const favs = store.get('favs', []).length;
   [['cart-badge', count], ['fav-badge', favs]].forEach(([id, n]) => {
     const el = document.getElementById(id);
+    if (!el) return;
     el.textContent = n;
     el.classList.toggle('hidden', n === 0);
     el.classList.toggle('flex', n > 0);
